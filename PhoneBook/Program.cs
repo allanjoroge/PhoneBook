@@ -162,6 +162,11 @@ namespace PhoneBook
                         Console.WriteLine("THAT'S NOT AN OPTION!!");
                         break;
                 }
+
+
+                Console.ReadLine();
+
+
             }
             Console.ReadLine();
         }
