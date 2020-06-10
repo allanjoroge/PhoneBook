@@ -45,7 +45,7 @@ namespace PhoneBook
                         break;
 
                     case 2:
-                        Console.Write("First name? ");
+                        Console.Write("First Name? ");
                         string fn = Console.ReadLine();
                         foreach (Person inf in people)
                         {
@@ -57,7 +57,7 @@ namespace PhoneBook
                         break;
 
                     case 3:
-                        Console.Write("Last name? ");
+                        Console.Write("Last Name? ");
                         string ln = Console.ReadLine();
                         foreach (Person inf in people)
                         {
