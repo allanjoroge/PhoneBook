@@ -10,30 +10,20 @@ namespace PhoneBook
     {
         static void Main(string[] args)
         {
-            Contact();
-        }
 
-        //LISTS
-        public static List<Person> people = new List<Person>();
-        public static List<Address> location = new List<Address>();
-        //INSTANCES OF MY CLASSES
-        public static Person someone = new Person();
-        public static Address addy = new Address();
+            List<Person> people = new List<Person>();
+            int command = 0;
 
-        public static void Contact()
-        {
-  
-            string command = "";
-            while (command != "exit")
+            do
             {
-
-                Console.Write("COMMAND? ");
-                command = Console.ReadLine();
+                Console.Write("Choose a Command: \n1.Add contact \n2.Search contact by first name\n3.Search contact by last name\n4.Search contact by City\n5.Delete a contact\n6.Sort by first name\n7.Exit\n");
+                command = Convert.ToInt32(Console.ReadLine());
 
                 switch (command)
                 {
+                    case 1:
+                        Person someone = new Person();
 
-                    case "ac":
                         Console.Write("First Name: ");
                         someone.firstname = Console.ReadLine();
                         Console.Write("Last Name: ");
@@ -43,132 +33,84 @@ namespace PhoneBook
                         Console.Write("Email: ");
                         someone.email = Console.ReadLine();
                         Console.Write("Street Address: ");
-                        addy.streetaddress = Console.ReadLine();
+                        someone.addy.streetaddress = Console.ReadLine();
                         Console.Write("City: ");
-                        addy.city = Console.ReadLine();
+                        someone.addy.city = Console.ReadLine();
                         Console.Write("Zip Code: ");
-                        addy.zipcode = Console.ReadLine();
+                        someone.addy.zipcode = Console.ReadLine();
                         Console.Write("State: ");
-                        addy.state = Console.ReadLine();
+                        someone.addy.state = Console.ReadLine();
 
                         people.Add(someone);
-                        location.Add(addy);
                         break;
 
-                    case "sbfn":
-                        Console.Write("search by first name? ");
+                    case 2:
+                        Console.Write("First name? ");
                         string fn = Console.ReadLine();
-                        if (someone.firstname.Equals(fn))
+                        foreach (Person inf in people)
                         {
-
-                            foreach (Person info in people)
+                            if (fn.Equals(inf.firstname))
                             {
-                                Console.WriteLine(info.firstname);
-                                Console.WriteLine(info.lastname);
-                                Console.WriteLine(info.phonenumber);
-                                Console.WriteLine(info.email);
-
-                                foreach (Address locat in location)
-                                {
-                                    Console.WriteLine(locat.streetaddress);
-                                    Console.WriteLine(locat.city);
-                                    Console.WriteLine(locat.zipcode);
-                                    Console.WriteLine(locat.state);
-                                }
+                                Console.WriteLine(inf.firstname + "\n" + inf.lastname + "\n" + inf.phonenumber + "\n" + inf.email + "\n" + inf.addy.streetaddress + "\n" + inf.addy.city + "\n" + inf.addy.zipcode + "\n" + inf.addy.state);
                             }
                         }
                         break;
 
-                    case "sbln":
-                        Console.Write("search by last name? ");
+                    case 3:
+                        Console.Write("Last name? ");
                         string ln = Console.ReadLine();
-                        if (someone.lastname.Equals(ln))
+                        foreach (Person inf in people)
                         {
-
-                            foreach (Person info in people)
+                            if (ln.Equals(inf.lastname))
                             {
-                                Console.WriteLine(info.firstname);
-                                Console.WriteLine(info.lastname);
-                                Console.WriteLine(info.phonenumber);
-                                Console.WriteLine(info.email);
-
-                                foreach (Address locat in location)
-                                {
-                                    Console.WriteLine(locat.streetaddress);
-                                    Console.WriteLine(locat.city);
-                                    Console.WriteLine(locat.zipcode);
-                                    Console.WriteLine(locat.state);
-                                }
+                                Console.WriteLine(inf.firstname + "\n" + inf.lastname + "\n" + inf.phonenumber + "\n" + inf.email + "\n" + inf.addy.streetaddress + "\n" + inf.addy.city + "\n" + inf.addy.zipcode + "\n" + inf.addy.state);
                             }
                         }
                         break;
 
-                    case "sbly":
-                        Console.Write("search by city? ");
+                    case 4:
+                        Console.Write("City? ");
                         string cty = Console.ReadLine();
-                        if (addy.city.Equals(cty))
+                        foreach (Person inf in people)
                         {
-
-                            foreach (Person info in people)
+                            if (cty.Equals(inf.addy.city))
                             {
-                                Console.WriteLine(info.firstname);
-                                Console.WriteLine(info.lastname);
-                                Console.WriteLine(info.phonenumber);
-                                Console.WriteLine(info.email);
-
-                                foreach (Address locat in location)
-                                {
-                                    Console.WriteLine(locat.streetaddress);
-                                    Console.WriteLine(locat.city);
-                                    Console.WriteLine(locat.zipcode);
-                                    Console.WriteLine(locat.state);
-                                }
+                                Console.WriteLine(inf.firstname + "\n" + inf.lastname + "\n" + inf.phonenumber + "\n" + inf.email + "\n" + inf.addy.streetaddress + "\n" + inf.addy.city + "\n" + inf.addy.zipcode + "\n" + inf.addy.state);
                             }
                         }
                         break;
 
-                    case "print names":
-
-                        Console.WriteLine(people);
-
-                        break;
-
-                    case "d":
-                        Console.Write("which contact do you want to delete by fn? ");
+                    case 5:
+                        Console.Write("First name? ");
                         string delete = Console.ReadLine();
-                        if (someone.firstname.Equals(delete))
+                        foreach (Person inf in people)
                         {
-                            people.Remove(someone);
-                            foreach (Person info in people)
+                            if (delete.Equals(inf.firstname))
                             {
-                               
-                                Console.WriteLine(info.firstname);
-                                Console.WriteLine(info.lastname);
-                                Console.WriteLine(info.phonenumber);
-                                Console.WriteLine(info.email);
-
-                                foreach (Address locat in location)
-                                {
-                                    Console.WriteLine(locat.streetaddress);
-                                    Console.WriteLine(locat.city);
-                                    Console.WriteLine(locat.zipcode);
-                                    Console.WriteLine(locat.state);
-                                }
+                                Console.WriteLine(inf.firstname + "\n" + inf.addy.streetaddress);
+                                people.Remove(inf);
+                                break; //break the loop, otherwise the program will crash
                             }
                         }
+                        break;
+
+                    case 6:
+                        List<Person> SortedContacts = people.OrderBy(a => a.firstname).ToList();
+                        foreach (Person Sort in SortedContacts)
+                        {
+                            Console.WriteLine(Sort.firstname);
+                        }
+                        break;
+
+                    case 7:
+                        Console.WriteLine("EXIT");
                         break;
 
                     default:
-                        Console.WriteLine("THAT'S NOT AN OPTION!!");
+                        Console.WriteLine("INVALID COMMAND!!");
                         break;
                 }
-
-
-                Console.ReadLine();
-
-
-            }
-            Console.ReadLine();
+            } while (command != 7);
         }
     }
 }
